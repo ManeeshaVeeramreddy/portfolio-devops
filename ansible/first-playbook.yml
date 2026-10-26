@@ -1,0 +1,15 @@
+
+---
+- name: Check my portfolio server
+  hosts: localhost
+  connection: local
+  gather_facts: true
+
+  tasks:
+    - name: Display a success message
+      ansible.builtin.debug:
+        msg: "My portfolio server is ready for Ansible automation!"
+
+    - name: Display operating system information
+      ansible.builtin.debug:
+        msg: "Operating system: {{ ansible_facts['distribution'] }}"

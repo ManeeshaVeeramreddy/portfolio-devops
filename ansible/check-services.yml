@@ -1,0 +1,28 @@
+
+---
+- name: Check portfolio services
+  hosts: localhost
+  connection: local
+  become: true
+  gather_facts: false
+
+  tasks:
+    - name: Check Docker service
+      ansible.builtin.command: systemctl is-active docker
+      register: docker_status
+      changed_when: false
+      failed_when: false
+
+    - name: Display Docker status
+      ansible.builtin.debug:
+        msg: "Docker status: {{ docker_status.stdout | default('unknown') }}"
+
+    - name: Check Caddy service
+      ansible.builtin.command: systemctl is-active caddy
+      register: caddy_status
+      changed_when: false
+      failed_when: false
+
+    - name: Display Caddy status
+      ansible.builtin.debug:
+        msg: "Caddy status: {{ caddy_status.stdout | default('unknown') }}"
