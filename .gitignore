@@ -24,3 +24,9 @@ ansible/*.pem
 
 # Ansible temporary files
 *.retry
+# Terraform crash logs
+crash.log
+crash.*.log
+
+# Ansible cache
+*.cache
