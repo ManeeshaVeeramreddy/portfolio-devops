@@ -17,3 +17,10 @@
 .vscode/
 Thumbs.db
 .DS_Store
+# Ansible sensitive files
+ansible/inventory.ini
+ansible/*.pem
+*.pem
+
+# Ansible temporary files
+*.retry

@@ -1,0 +1,29 @@
+---
+- name: Deploy Portfolio on AWS EC2
+  hosts: portfolio
+  become: true
+
+  tasks:
+    - name: Check Docker installation
+      command: docker --version
+      register: docker_version
+      changed_when: false
+
+    - name: Display Docker version
+      debug:
+        msg: "{{ docker_version.stdout }}"
+
+    - name: Pull portfolio Docker image
+      community.docker.docker_image:
+        name: maneesha0805/portfolio
+        tag: v1
+        source: pull
+
+    - name: Ensure portfolio container is running
+      community.docker.docker_container:
+        name: my-portfolio
+        image: maneesha0805/portfolio:v1
+        state: started
+        restart_policy: unless-stopped
+        published_ports:
+          - "127.0.0.1:8080:80"
